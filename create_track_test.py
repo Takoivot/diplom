@@ -16,6 +16,9 @@ def positive_assert():
 
 
 def test():
+    order = sender_stand_request.post_new_order(data.order_body)
+    data.params_get["t"] = get_new_track(order)
+    print(data.params_get["t"])
     positive_assert()
 
 # Сахбиев Артур, 21-я когорта — Финальный проект. Инженер по тестированию плюс

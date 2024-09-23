@@ -22,7 +22,7 @@ def test():
     data.params_get["t"] = get_new_track(order)
     # выводит номер трека заказа
     print(data.params_get["t"])
-    # проверка кода ответа
+    # выполняет запрос на получение заказа по номеру трека и проверяет, что код ответа равен 200
     positive_assert()
 
 

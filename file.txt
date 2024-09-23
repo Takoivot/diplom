@@ -1,0 +1,55 @@
+Задание 1
+Представь: тебе нужно проверить, отображается ли созданный заказ в базе данных.
+Для этого: выведи список логинов курьеров с количеством их заказов в статусе «В доставке» (поле inDelivery = true). 
+
+scooter_rent=# SELECT c."login", COUNT(o.id) AS order_count
+scooter_rent-# FROM "Couriers" AS c
+scooter_rent-# JOIN "Orders" AS o ON c."id" = o."courierId"
+scooter_rent-# WHERE o."inDelivery" = true
+scooter_rent-# GROUP BY c."login";
+ login | order_count 
+-------+-------------
+ Alex  |           2
+(1 row)
+
+
+Задание 2
+Ты тестируешь статусы заказов. Нужно убедиться, что в базе данных они записываются корректно.
+Для этого: выведи все трекеры заказов и их статусы. 
+Статусы определяются по следующему правилу:
+Если поле finished == true, то вывести статус 2.
+Если поле canсelled == true, то вывести статус -1.
+Если поле inDelivery == true, то вывести статус 1.
+Для остальных случаев вывести 0.
+
+scooter_rent=# SELECT "track" FROM "Orders";
+ track  
+--------
+ 472674
+ 472674
+ 958898
+ 839473
+ 685170
+ 685170
+(6 rows)
+
+scooter_rent=# SELECT 
+scooter_rent-#     "track",
+scooter_rent-#     CASE
+scooter_rent-#         WHEN "finished" = true THEN 2
+scooter_rent-#         WHEN "cancelled" = true THEN -1
+scooter_rent-#         WHEN "inDelivery" = true THEN 1
+scooter_rent-#         ELSE 0
+scooter_rent-#     END AS status
+scooter_rent-# FROM "Orders";
+ track  | status 
+--------+--------
+ 472674 |      1
+ 472674 |      1
+ 958898 |      0
+ 839473 |      0
+ 685170 |      2
+ 685170 |      2
+(6 rows)
+
+scooter_rent=#

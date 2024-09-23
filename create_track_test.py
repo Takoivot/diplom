@@ -16,9 +16,14 @@ def positive_assert():
 
 
 def test():
+    # создает новый заказ и сохраняет результат в параметр order
     order = sender_stand_request.post_new_order(data.order_body)
+    # извлекает номер трека и сохраняет в словаре по ключу
     data.params_get["t"] = get_new_track(order)
+    # выводит номер трека заказа
     print(data.params_get["t"])
+    # проверка кода ответа
     positive_assert()
+
 
 # Сахбиев Артур, 21-я когорта — Финальный проект. Инженер по тестированию плюс
